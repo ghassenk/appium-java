@@ -52,7 +52,6 @@ public class AppiumHelper {
     }
 
     //region Not Working
-
     private static void startServer(DesiredCapabilities capabilities) {
         final AppiumServiceBuilder builder;
         builder = new AppiumServiceBuilder();
@@ -72,6 +71,5 @@ public class AppiumHelper {
         File app = new File(appDir.getCanonicalPath(), apkName);
         capabilities.setCapability("app", app.getAbsolutePath());
     }
-
     //endregion
 }

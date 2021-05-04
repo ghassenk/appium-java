@@ -18,6 +18,21 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
+//task startAppium(type:Exec) {
+//    workingDir '/home/g/.nvm/versions/node/v16.0.0/bin/'
+//
+//    //on linux
+//    commandLine './appium'
+//
+//    //store the output instead of printing to the console:
+//    standardOutput = new ByteArrayOutputStream()
+//
+//    //extension method stopTomcat.output() can be used to obtain the output:
+//    ext.output = {
+//        return standardOutput.toString()
+//    }
+//}
+
 test {
     useJUnitPlatform()
 }
