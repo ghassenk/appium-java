@@ -1,2 +1,2 @@
-#bash
-appium --app app-debug.apk
+#!/bin/bash
+cp ../android-app/app/build/outputs/apk/debug/app-debug.apk ./

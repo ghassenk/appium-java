@@ -1,7 +1,6 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class ButtonClickTest extends AbsTest {
@@ -13,21 +12,19 @@ public class ButtonClickTest extends AbsTest {
     private MobileElement textView;
 
     private void clickOnButton() {
+        Assert.assertNotNull(button);
         button.click();
     }
 
     private String getText() {
+        Assert.assertNotNull(textView);
         return textView.getText();
     }
 
-    @BeforeTest
-    public void setUp() {
-
-    }
-
     @Test
-    public void testAlertMessage() {
-      //  clickOnButton();
-     //   Assert.assertEquals(getText(), "CLICKED");
+    public void testButtonClick() {
+        Assert.assertEquals(getText(), "NOT_CLICKED");
+//        clickOnButton();
+//        Assert.assertEquals(getText(), "CLICKED");
     }
 }

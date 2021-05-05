@@ -1,2 +1,6 @@
 #!/bin/bash
-appium --app app-debug.apk
+wd=$(pwd)
+cd ../android-app/ || exit
+./gradlew assembleDebug
+cd "$wd" || exit
+
