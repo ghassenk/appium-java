@@ -1,3 +1,11 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/.name
+/compiler.xml
+/gradle.xml
+/jarRepositories.xml
+/markdown-navigator-enh.xml
+/markdown-navigator.xml
+/misc.xml
+/vcs.xml
