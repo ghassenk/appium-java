@@ -1,0 +1,2 @@
+#bash
+appium --app app-debug.apk
