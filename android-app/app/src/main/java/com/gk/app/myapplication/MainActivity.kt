@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.simpleButton).setOnClickListener {
             Log.i(javaClass.simpleName, "onClick()")
-            findViewById<Button>(R.id.simpleTextView).text = "CLICKED"
+            findViewById<TextView>(R.id.simpleTextView).text = "CLICKED"
         }
     }
 }

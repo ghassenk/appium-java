@@ -1,2 +1,3 @@
 #!/bin/bash
-appium --app app-debug.apk
+# appium --app app-debug.apk
+appium --default-capabilities '{"app": "app-debug.apk"}'

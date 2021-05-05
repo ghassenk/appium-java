@@ -3,13 +3,15 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class AppiumHelper {
+
+    private static final boolean enableLogs = true;
 
     public static class TestFrameworkError extends Throwable {
         public TestFrameworkError(String msg) {
@@ -24,9 +26,12 @@ public class AppiumHelper {
             final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
             URL url = new URL(URL_STRING);
             DesiredCapabilities capabilities = new DesiredCapabilities();
+
+
             driver = new AndroidDriver<>(url, capabilities);
             //Use a higher value if your mobile elements take time to show up
             driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+
         } catch (Throwable throwable) {
             String msg = throwable.getMessage();
             if (msg != null && msg.contains("Connection refused")) {
@@ -48,5 +53,27 @@ public class AppiumHelper {
 
     public static void tearDownTest() {
 
+    }
+
+    public static String getElementText(MobileElement element) {
+        return element.getText();
+    }
+
+    public static void clickButton(MobileElement button) {
+        logMsg("Clicking on button:" + button + "...");
+        button.click();
+        logMsg("Button click OK.");
+    }
+
+    public static void waitUntilTextPresent(MobileElement element, String text) {
+        logMsg("Waiting for text:" + text + " in element:" + element + "...");
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
+    private static void logMsg(String msg) {
+        if (enableLogs) {
+            System.out.println(msg);
+        }
     }
 }
