@@ -12,19 +12,21 @@ public class ButtonClickTest extends AbsTest {
     private MobileElement textView;
 
     private void clickOnButton() {
-        Assert.assertNotNull(button);
         button.click();
     }
 
     private String getText() {
-        Assert.assertNotNull(textView);
         return textView.getText();
     }
 
     @Test
     public void testButtonClick() {
+        Assert.assertNotNull(textView);
+        Assert.assertNotNull(button);
+
+        //System.out.println(button.getId());
         Assert.assertEquals(getText(), "NOT_CLICKED");
-//        clickOnButton();
-//        Assert.assertEquals(getText(), "CLICKED");
+        clickOnButton();
+        Assert.assertEquals(getText(), "CLICKED");
     }
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 public abstract class AbsTest {
 
     @BeforeSuite
-    public void setUpAppium() throws IOException {
+    public void setUpAppium() throws Throwable {
         AppiumHelper.setUpAppium();
     }
 
