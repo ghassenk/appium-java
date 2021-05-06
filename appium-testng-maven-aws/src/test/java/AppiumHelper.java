@@ -20,13 +20,13 @@ public class AppiumHelper {
     }
 
     private static AndroidDriver<MobileElement> driver;
+//    private static AndroidDriver<MobileElement> driver;
 
     public static void setUpAppium() throws Throwable {
         try {
             final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
             URL url = new URL(URL_STRING);
             DesiredCapabilities capabilities = new DesiredCapabilities();
-
 
             driver = new AndroidDriver<>(url, capabilities);
             //Use a higher value if your mobile elements take time to show up
@@ -53,6 +53,11 @@ public class AppiumHelper {
 
     public static void tearDownTest() {
 
+    }
+
+
+    public static MobileElement findElementById(String id) {
+        return driver.findElementById(id);
     }
 
     public static String getElementText(MobileElement element) {

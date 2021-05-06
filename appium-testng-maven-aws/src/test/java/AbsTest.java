@@ -1,7 +1,4 @@
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -17,6 +14,16 @@ public abstract class AbsTest {
         AppiumHelper.tearDownAppium();
     }
 
+    @BeforeClass
+    public void setUpClass() {
+        // TODO open screen if any
+    }
+
+    @AfterClass
+    public void tearDownClass() {
+
+    }
+
     @BeforeTest
     public void setUpTest() {
         AppiumHelper.setUpTest(this);
@@ -26,4 +33,6 @@ public abstract class AbsTest {
     public void tearDownTest() {
         AppiumHelper.tearDownTest();
     }
+
+
 }

@@ -3,4 +3,4 @@ wd=$(pwd)
 cd ../android-app/ || exit
 ./gradlew assembleDebug
 cd "$wd" || exit
-
+cp ../android-app/app/build/outputs/apk/debug/app-debug.apk ./
