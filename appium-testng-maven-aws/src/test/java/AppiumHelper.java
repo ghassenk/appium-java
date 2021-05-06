@@ -8,7 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class AppiumHelper {
@@ -27,13 +30,15 @@ public class AppiumHelper {
         try {
             final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
             URL url = new URL(URL_STRING);
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            final String targetOs = System.getenv("APPIUM_TARGET_OS");
+            DesiredCapabilities desiredcapabilities = new DesiredCapabilities();
+
+            final String targetOs = getTargetOsFromPropertiesFile();
+            logMsg("Found targetOs=" + targetOs);
 
             if ("android".equals(targetOs)) {
-                driver = new AndroidDriver<>(url, capabilities);
+                driver = new AndroidDriver<>(url, desiredcapabilities);
             } else if ("ios".equals(targetOs)) {
-                driver = new IOSDriver<>(url, capabilities);
+                driver = new IOSDriver<>(url, desiredcapabilities);
             } else {
                 throw new IllegalArgumentException("Target OS env var not found!");
             }
@@ -89,5 +94,24 @@ public class AppiumHelper {
         if (enableLogs) {
             System.out.println(msg);
         }
+    }
+
+    private static String getTargetOsFromPropertiesFile() {
+        try (InputStream input = AppiumHelper.class.getClassLoader().getResourceAsStream(
+                "appium.properties")) {
+
+            if (input == null) {
+                logMsg("Sorry, unable to find appium.properties");
+                return null;
+            } else {
+                Properties properties = new Properties();
+                properties.load(input);
+                return properties.getProperty("appium.target.os");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 }

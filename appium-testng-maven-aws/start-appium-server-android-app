@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# Set target os in appium.properties file
+echo "appium.target.os=android"> ./src/test/resources/appium.properties
 appium --default-capabilities '{"app": "app-debug.apk"}'
