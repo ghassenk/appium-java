@@ -2,7 +2,7 @@ import io.appium.java_client.MobileElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MainScreenButtonClickTest extends AbsTest {
+public class MainScreenTests extends AbsTest {
 
     @Test
     public void testButtonClick() {

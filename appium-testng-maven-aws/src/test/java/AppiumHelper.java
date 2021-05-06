@@ -1,5 +1,7 @@
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -19,16 +21,23 @@ public class AppiumHelper {
         }
     }
 
-    private static AndroidDriver<MobileElement> driver;
-//    private static AndroidDriver<MobileElement> driver;
+    private static AppiumDriver<MobileElement> driver;
 
     public static void setUpAppium() throws Throwable {
         try {
             final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
             URL url = new URL(URL_STRING);
             DesiredCapabilities capabilities = new DesiredCapabilities();
+            final String targetOs = System.getenv("APPIUM_TARGET_OS");
 
-            driver = new AndroidDriver<>(url, capabilities);
+            if ("android".equals(targetOs)) {
+                driver = new AndroidDriver<>(url, capabilities);
+            } else if ("ios".equals(targetOs)) {
+                driver = new IOSDriver<>(url, capabilities);
+            } else {
+                throw new IllegalArgumentException("Target OS env var not found!");
+            }
+
             //Use a higher value if your mobile elements take time to show up
             driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
 
