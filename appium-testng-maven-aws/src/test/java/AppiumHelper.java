@@ -3,6 +3,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.remote.AutomationName;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,6 +40,7 @@ public class AppiumHelper {
             if ("android".equals(targetOs)) {
                 driver = new AndroidDriver<>(url, desiredcapabilities);
             } else if ("ios".equals(targetOs)) {
+                //desiredcapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
                 driver = new IOSDriver<>(url, desiredcapabilities);
             } else {
                 throw new IllegalArgumentException("Target OS env var not found!");

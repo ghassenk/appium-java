@@ -2,4 +2,4 @@
 
 # Set target os in appium.properties file
 echo "appium.target.os=ios"> ./src/test/resources/appium.properties
-appium --default-capabilities '{"app": "AppiumAutomatedTesting.app", "AutomationName": "XCUITest"}'
+appium --default-capabilities '{"app": "AppiumAutomatedTesting.app", "AutomationName": "XCuiTest"}'
