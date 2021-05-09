@@ -2,4 +2,5 @@
 
 # Set target os in appium.properties file
 echo "appium.target.os=ios"> ./src/test/resources/appium.properties
-appium --default-capabilities '{"app": "AppiumAutomatedTesting.app", "AutomationName": "XCuiTest"}'
+# appium --default-capabilities '{"app": "AppiumAutomatedTesting.app", "automationName": "XCUITest", "platformName": "iOS", "platformVersion": "14.5", "deviceName": "iPhone 12"}'
+appium --default-capabilities '{"bundleId": "com.nextradiotv.appium-testing.AppiumAutomatedTesting", "automationName": "XCUITest", "platformName": "iOS", "platformVersion": "14.5", "deviceName": "iPhone 12"}'

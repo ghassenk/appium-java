@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class AppiumHelper {
 
     private static final boolean enableLogs = true;
+    private static String targetOs;
 
     public static class TestFrameworkError extends Throwable {
         public TestFrameworkError(String msg) {
@@ -34,13 +35,12 @@ public class AppiumHelper {
             URL url = new URL(URL_STRING);
             DesiredCapabilities desiredcapabilities = new DesiredCapabilities();
 
-            final String targetOs = getTargetOsFromPropertiesFile();
+            targetOs = getTargetOsFromPropertiesFile();
             logMsg("Found targetOs=" + targetOs);
 
             if ("android".equals(targetOs)) {
                 driver = new AndroidDriver<>(url, desiredcapabilities);
             } else if ("ios".equals(targetOs)) {
-                //desiredcapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
                 driver = new IOSDriver<>(url, desiredcapabilities);
             } else {
                 throw new IllegalArgumentException("Target OS env var not found!");
@@ -72,9 +72,14 @@ public class AppiumHelper {
 
     }
 
-
     public static MobileElement findElementById(String id) {
-        return driver.findElementById(id);
+        if ("android".equals(targetOs)) {
+            return driver.findElementById(id);
+        } else if ("ios".equals(targetOs)) {
+            return driver.findElementByAccessibilityId(id);
+        } else {
+            throw new IllegalStateException("No target os defined!");
+        }
     }
 
     public static String getElementText(MobileElement element) {
